@@ -2,17 +2,17 @@
 
 namespace CRUDAPPDEMO.Models
 {
-    public class Student
+    public class Teacher
     {
         [Key]
         [Required]
-
-        [Display(Name = "Student ID")]
+        [Display(Name = "Teacher ID")]
+      
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Student Name is required")]
+        [Required(ErrorMessage = "Teacher Name is required")]
         [StringLength(50, ErrorMessage = "Name cannot exceed 50 characters")]
-        [Display(Name = "Student Name")]
+        [Display(Name = "Teacher Name")]
         public string Name { get; set; }
         [EmailAddress(ErrorMessage = "Invalid Email format")]
         [StringLength(80)]
@@ -21,8 +21,6 @@ namespace CRUDAPPDEMO.Models
         [StringLength(30)]
         public string Course { get; set; }
 
-        public int TeacherId { get; set; }
-        public Teacher Teacher { get; set; }
-
+        public Student Student { get; set; }
     }
 }
