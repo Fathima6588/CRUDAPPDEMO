@@ -7,6 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20251124113917_newone.cs" />
+    <Compile Remove="Migrations\20251124113917_newone.Designer.cs" />
+    <Compile Remove="Views\Students\Index1.cshtml.cs" />
+    <Compile Remove="Views\Teachers\Index1.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Students\Index1.cshtml" />
+    <Content Remove="Views\Students\studentform.cshtml" />
+    <Content Remove="Views\Teachers\Index1.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
       <PrivateAssets>all</PrivateAssets>

@@ -1,8 +1,112 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
+    var heroImage = Url.Content("https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f6b2a8b0a8d4b6f2f3d6a9f1d2b8c7e");
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<style>
+    .hero { position: relative; background-image: url('@heroImage'); background-size: cover; background-position: center; min-height: 480px; display: flex; align-items: center; color: #fff; overflow: hidden; border-radius: .5rem; margin-bottom: 1.5rem; }
+    .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,12,34,0.62), rgba(6,12,34,0.40)); backdrop-filter: blur(4px); z-index: 0; }
+    .hero-container { position: relative; z-index: 1; width: 100%; padding: 3rem 1.25rem; }
+    .hero-heading { font-size: 2.5rem; font-weight: 700; margin-bottom: .25rem; }
+    .hero-lead { color: rgba(255,255,255,0.92); margin-bottom: 1.25rem; font-size: 1.05rem; }
+    .stat-card { background: rgba(255,255,255,0.06); border-radius: .5rem; padding: .6rem 1rem; min-width: 110px; text-align: center; }
+    .quick-card { background: rgba(255,255,255,0.06); color: #fff; border: none; border-radius: .5rem; padding: 1rem; }
+    .fade-up { transform: translateY(10px); opacity: 0; animation: fadeUp .5s forwards; }
+    @@keyframes fadeUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="hero shadow-sm">
+                <div class="container hero-container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-7 text-center text-lg-start">
+                            <div class="fade-up">
+                                <div class="hero-heading">Welcome to CRUDAPPDEMO</div>
+                                <p class="hero-lead">Effortless school administration — fast searches, clear records and simple workflows for students and teachers.</p>
+                            </div>
+
+                            <div class="d-flex gap-2 flex-wrap hero-ctas fade-up delay">
+                                <a class="btn btn-primary btn-lg" asp-controller="Students" asp-action="Index">
+                                    <i class="fa-solid fa-user-graduate me-2"></i> Manage Students
+                                </a>
+                                <a class="btn btn-outline-light btn-lg" asp-controller="Teachers" asp-action="Index">
+                                    <i class="fa-solid fa-chalkboard-user me-2"></i> Manage Teachers
+                                </a>
+                            </div>
+
+                            <div class="d-flex gap-2 flex-wrap mt-3 fade-up delay">
+                                <div class="stat-card">
+                                    <small>Students</small>
+                                    <div class="value">@ViewBag.StudentCount</div>
+                                </div>
+                                <div class="stat-card">
+                                    <small>Teachers</small>
+                                    <div class="value">@ViewBag.TeacherCount</div>
+                                </div>
+                                <div class="stat-card">
+                                    <small>Active Reports</small>
+                                    <div class="value">—</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 d-none d-lg-flex justify-content-center">
+                            <div class="quick-card shadow-sm fade-up delay" style="width:100%; max-width:360px;">
+                                <h6 class="mb-2">Quick Actions</h6>
+                                <p class="small text-muted mb-3">Create records and navigate quickly.</p>
+                                <div class="d-grid gap-2">
+                                    <a class="btn btn-light text-start" asp-controller="Students" asp-action="Create"><i class="fa-solid fa-plus me-2"></i> Add Student</a>
+                                    <a class="btn btn-light text-start" asp-controller="Teachers" asp-action="Create"><i class="fa-solid fa-plus me-2"></i> Add Teacher</a>
+                                    <a class="btn btn-outline-light text-start" asp-controller="Home" asp-action="Privacy"><i class="fa-solid fa-gear me-2"></i> Settings</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- row -->
+                </div> <!-- hero-container -->
+            </div> <!-- hero -->
+        </div>
+    </div>
+
+    <div class="row mt-4 g-3">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body d-flex gap-3 align-items-start">
+                    <i class="fa-solid fa-clock fa-2x text-primary"></i>
+                    <div>
+                        <h6 class="card-title mb-1">Recent Activity</h6>
+                        <p class="text-muted mb-0">No recent actions — create a student or teacher to begin tracking activity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body d-flex gap-3 align-items-start">
+                    <i class="fa-solid fa-chart-line fa-2x text-success"></i>
+                    <div>
+                        <h6 class="card-title mb-1">Reports</h6>
+                        <p class="text-muted mb-0">Generate quick reports on students and teacher assignments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body d-flex gap-3 align-items-start">
+                    <i class="fa-solid fa-headset fa-2x text-info"></i>
+                    <div>
+                        <h6 class="card-title mb-1">Support</h6>
+                        <p class="text-muted mb-0">Need help? Contact the admin or check settings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                  

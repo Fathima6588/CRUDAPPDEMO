@@ -1,13 +1,13 @@
-﻿@model IEnumerable<CRUDAPPDEMO.Models.Student>
+﻿@model IEnumerable<CRUDAPPDEMO.Models.Teacher>
 
 @{
-    ViewData["Title"] = "Students";
+    ViewData["Title"] = "Teachers";
 }
 
 <div class="row mb-3">
     <div class="col-md-8">
-        <h2 class="mb-0"><i class="fa-solid fa-user-graduate me-2"></i>Students</h2>
-        <small class="text-muted">Manage students — view, edit or remove records</small>
+        <h2 class="mb-0"><i class="fa-solid fa-chalkboard-user me-2"></i>Teachers</h2>
+        <small class="text-muted">Manage teachers — view, edit or remove records</small>
     </div>
     <div class="col-md-4 d-flex justify-content-md-end align-items-center mt-3 mt-md-0">
         <div class="me-2" style="width:100%; max-width:360px;">
@@ -20,7 +20,7 @@
 <div class="card card-hero mb-4">
     <div class="card-body">
         <div class="table-responsive">
-            <table id="studentsTable" class="table table-hover align-middle">
+            <table id="teachersTable" class="table table-hover align-middle">
                 <thead class="table-light">
                     <tr>
                         <th style="width:60px;">#</th>
@@ -64,7 +64,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="5" class="text-center text-muted py-4">No students found.</td>
+                            <td colspan="5" class="text-center text-muted py-4">No teachers found.</td>
                         </tr>
                     }
                 </tbody>
@@ -75,13 +75,12 @@
 
 @section Scripts {
     <script>
-        // client-side table search (filters rows by text in any cell)
         (function () {
             const input = document.getElementById('tableSearch');
-            const table = document.getElementById('studentsTable');
-            const tbody = table.querySelector('tbody');
+            const table = document.getElementById('teachersTable');
+            const tbody = table && table.querySelector('tbody');
 
-            input.addEventListener('input', function () {
+            input && input.addEventListener('input', function () {
                 const q = this.value.trim().toLowerCase();
                 if (!tbody) return;
                 const rows = Array.from(tbody.querySelectorAll('tr'));
@@ -96,10 +95,8 @@
             });
         })();
 
-        // nicer delete confirmation (can be customized)
         function confirmDelete(form) {
-            // you can use Bootstrap modal here instead of confirm()
-            return confirm('Are you sure you want to delete this student?');
+            return confirm('Are you sure you want to delete this teacher?');
         }
     </script>
 }

@@ -1,52 +1,201 @@
-﻿<!DOCTYPE html>
+﻿@* Views/Shared/_Layout.cshtml *@
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - CRUDAPPDEMO</title>
-    <script type="importmap"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/CRUDAPPDEMO.styles.css" asp-append-version="true" />
+
+
+        <style>
+        :root {
+            --sidebar-width: 260px;
+            --brand-color: #0d6efd;
+            --muted: #6c757d;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        }
+
+        .app-shell {
+            display: flex;
+        }
+
+        aside.app-sidebar {
+            width: var(--sidebar-width); 
+            min-height: 100vh;
+            background: #0b1220;
+            color: #fff;
+            padding: 1.25rem 0.75rem;
+            position: sticky;
+            top: 0;
+        }
+
+        .app-sidebar .nav-link { color: rgba(255,255,255,0.9); }
+        .app-sidebar .nav-link.active { background: rgba(255,255,255,0.06); border-radius: .5rem; }
+
+        .brand { display: flex; align-items: center; gap: .6rem; font-weight: 700; margin-bottom: 1rem; }
+        .brand .logo {
+            width: 40px; height: 40px; border-radius: .5rem;
+            background: linear-gradient(45deg,#4f46e5,#06b6d4);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 700;
+            box-shadow: 0 6px 18px rgba(11,18,32,0.25);
+        }
+
+        .topbar {
+            height: 64px; display: flex; align-items: center; justify-content: space-between;
+            padding: 0.5rem 1rem; gap: 1rem; border-bottom: 1px solid #e9ecef; background: #fff;
+        }
+
+        .search-sm { max-width: 420px; width: 100%; }
+
+        .card-hero { background: linear-gradient(90deg, #eef2ff, #fff); border: 0; box-shadow: none; }
+
+        footer.app-footer {
+            padding: 1rem 1.5rem; font-size: .9rem; color: var(--muted); border-top: 1px solid #e9ecef; background: #fff;
+        }
+
+        /* Responsive rules are in wwwroot/css/site.css to avoid Razor  parsing issues */
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CRUDAPPDEMO</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Manage Students</a>
-                        </li>
-                    </ul>
+    <div class="app-shell">
+        <aside class="app-sidebar d-flex flex-column">
+            <a class="brand text-decoration-none text-white mb-3" asp-controller="Home" asp-action="Index">
+                <div class="logo">CA</div>
+                <div>
+                    <div style="font-size:0.95rem">CRUDAPPDEMO</div>
+                    <small style="color:rgba(255,255,255,0.7)">Students & Teachers</small>
+                </div>
+            </a>
+
+            <nav class="nav flex-column">
+                <a class="nav-link d-flex align-items-center mb-1 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")"
+                   asp-controller="Home" asp-action="Index">
+                    <i class="fa-solid fa-house me-2"></i> Dashboard
+                </a>
+
+                <a class="nav-link d-flex align-items-center mb-1 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Students" ? "active" : "")"
+                   asp-controller="Students" asp-action="Index">
+                    <i class="fa-solid fa-user-graduate me-2"></i> Manage Students
+                </a>
+
+                <a class="nav-link d-flex align-items-center mb-1 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Teachers" ? "active" : "")"
+                   asp-controller="Teachers" asp-action="Index">
+                    <i class="fa-solid fa-chalkboard-user me-2"></i> Manage Teachers
+                </a>
+
+                <hr style="border-top:1px solid rgba(255,255,255,0.06)">
+
+                <a class="nav-link d-flex align-items-center mb-1" asp-controller="Home" asp-action="Privacy">
+                    <i class="fa-solid fa-shield-halved me-2"></i> Privacy
+                </a>
+            </nav>
+
+            <div class="mt-auto small" style="opacity:.9; padding-top:1rem">
+                <div>Version <strong>1.0</strong></div>
+                <div class="text-white-50">© @DateTime.Now.Year CRUDAPPDEMO</div>
+            </div>
+        </aside>
+
+        <div class="flex-fill">
+            <header class="topbar d-flex align-items-center">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-outline-secondary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h5 class="mb-0">@ViewData["Title"]</h5>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <form class="d-none d-md-block me-2">
+                        <div class="input-group search-sm">
+                            <input type="search" class="form-control" placeholder="Search students, teachers, courses..." aria-label="Search">
+                            <button class="btn btn-outline-secondary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <button id="themeToggle" class="btn btn-outline-secondary" title="Toggle theme"><i class="fa-solid fa-sun"></i></button>
+
+                        <div class="dropdown">
+                            <a class="d-flex align-items-center text-decoration-none" href="#" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="me-2 text-end">
+                                    <div style="font-size:.85rem">Admin</div>
+                                    <small class="text-muted">Administrator</small>
+                                </div>
+                                <img src="https://pbs.twimg.com/media/EnmCtA1XIAAwE8H.jpg" alt="avatar" style="width:42px; height:42px; object-fit:cover; border-radius:50%; box-shadow:0 2px 8px rgba(0,0,0,0.08)" />
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Settings"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+                                        <button class="dropdown-item"><i class="fa-solid fa-right-from-bracket me-2"></i>Sign out</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="mobileSidebarLabel">CRUDAPPDEMO</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <nav class="nav flex-column">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Dashboard</a>
+                        <a class="nav-link" asp-controller="Students" asp-action="Index">Manage Students</a>
+                        <a class="nav-link" asp-controller="Teachers" asp-action="Index">Manage Teachers</a>
+                        <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </nav>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+            <main class="p-4">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </main>
+
+            <footer class="app-footer">
+                <div class="container d-flex justify-content-between">
+                    <div>© @DateTime.Now.Year CRUDAPPDEMO</div>
+                </div>
+            </footer>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - CRUDAPPDEMO - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        (function(){
+          const btn = document.getElementById('themeToggle');
+          function applyDark(dark){
+            if(dark){ document.body.style.background = '#0f1724'; document.body.style.color = '#e6eef8'; }
+            else { document.body.style.background = ''; document.body.style.color = ''; }
+            btn.innerHTML = dark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+          }
+          let dark = localStorage.getItem('crud-theme') === 'dark';
+          applyDark(dark);
+          btn.addEventListener('click', function(){ dark = !dark; localStorage.setItem('crud-theme', dark ? 'dark' : 'light'); applyDark(dark); });
+        })();
+    </script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
