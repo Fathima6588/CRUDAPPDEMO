@@ -6,16 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>@ViewData["Title"] - CRUDAPPDEMO</title>
 
-    <!-- Bootstrap (local or CDN) -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
-
-    <!-- Optional custom CSS: adjust variables, spacing, colors -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <style>
-        /* quick polished theme — move to site.css if you want */
+
+
+        <style>
         :root {
             --sidebar-width: 260px;
             --brand-color: #0d6efd;
@@ -32,7 +28,7 @@
         }
 
         aside.app-sidebar {
-            width: var(--sidebar-width);
+            width: var(--sidebar-width); 
             min-height: 100vh;
             background: #0b1220;
             color: #fff;
@@ -41,82 +37,36 @@
             top: 0;
         }
 
-        .app-sidebar .nav-link {
-            color: rgba(255,255,255,0.9);
+        .app-sidebar .nav-link { color: rgba(255,255,255,0.9); }
+        .app-sidebar .nav-link.active { background: rgba(255,255,255,0.06); border-radius: .5rem; }
+
+        .brand { display: flex; align-items: center; gap: .6rem; font-weight: 700; margin-bottom: 1rem; }
+        .brand .logo {
+            width: 40px; height: 40px; border-radius: .5rem;
+            background: linear-gradient(45deg,#4f46e5,#06b6d4);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 700;
+            box-shadow: 0 6px 18px rgba(11,18,32,0.25);
         }
-
-            .app-sidebar .nav-link.active {
-                background: rgba(255,255,255,0.06);
-                border-radius: .5rem;
-            }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: .6rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-            .brand .logo {
-                width: 40px;
-                height: 40px;
-                border-radius: .5rem;
-                background: linear-gradient(45deg,#4f46e5,#06b6d4);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #fff;
-                font-weight: 700;
-                box-shadow: 0 6px 18px rgba(11,18,32,0.25);
-            }
 
         .topbar {
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.5rem 1rem;
-            gap: 1rem;
-            border-bottom: 1px solid #e9ecef;
-            background: #fff;
+            height: 64px; display: flex; align-items: center; justify-content: space-between;
+            padding: 0.5rem 1rem; gap: 1rem; border-bottom: 1px solid #e9ecef; background: #fff;
         }
 
-        .search-sm {
-            max-width: 420px;
-            width: 100%;
-        }
+        .search-sm { max-width: 420px; width: 100%; }
 
-        .card-hero {
-            background: linear-gradient(90deg, #eef2ff, #fff);
-            border: 0;
-            box-shadow: none;
-        }
+        .card-hero { background: linear-gradient(90deg, #eef2ff, #fff); border: 0; box-shadow: none; }
 
         footer.app-footer {
-            padding: 1rem 1.5rem;
-            font-size: .9rem;
-            color: var(--muted);
-            border-top: 1px solid #e9ecef;
-            background: #fff;
-        }
-        @@media (max-width: 991px) {
-            aside .app-sidebar
-
-        {
-            display: none;
+            padding: 1rem 1.5rem; font-size: .9rem; color: var(--muted); border-top: 1px solid #e9ecef; background: #fff;
         }
 
-        .app-shell {
-            flex-direction: column;
-        }
-
-        }
+        /* Responsive rules are in wwwroot/css/site.css to avoid Razor  parsing issues */
     </style>
 </head>
 <body>
     <div class="app-shell">
-        <!-- Sidebar -->
         <aside class="app-sidebar d-flex flex-column">
             <a class="brand text-decoration-none text-white mb-3" asp-controller="Home" asp-action="Index">
                 <div class="logo">CA</div>
@@ -147,7 +97,6 @@
                 <a class="nav-link d-flex align-items-center mb-1" asp-controller="Home" asp-action="Privacy">
                     <i class="fa-solid fa-shield-halved me-2"></i> Privacy
                 </a>
-
             </nav>
 
             <div class="mt-auto small" style="opacity:.9; padding-top:1rem">
@@ -156,21 +105,16 @@
             </div>
         </aside>
 
-        <!-- Main content column -->
         <div class="flex-fill">
-            <!-- Topbar -->
             <header class="topbar d-flex align-items-center">
                 <div class="d-flex align-items-center gap-3">
-                    <!-- Mobile menu (toggles offcanvas sidebar in small screens) -->
                     <button class="btn btn-outline-secondary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
                         <i class="fa-solid fa-bars"></i>
                     </button>
-
                     <h5 class="mb-0">@ViewData["Title"]</h5>
                 </div>
 
                 <div class="d-flex align-items-center gap-2">
-                    <!-- Search -->
                     <form class="d-none d-md-block me-2">
                         <div class="input-group search-sm">
                             <input type="search" class="form-control" placeholder="Search students, teachers, courses..." aria-label="Search">
@@ -178,7 +122,6 @@
                         </div>
                     </form>
 
-                    <!-- quick actions -->
                     <div class="d-flex align-items-center gap-2">
                         <button id="themeToggle" class="btn btn-outline-secondary" title="Toggle theme"><i class="fa-solid fa-sun"></i></button>
 
@@ -205,7 +148,6 @@
                 </div>
             </header>
 
-            <!-- offcanvas mobile sidebar -->
             <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="mobileSidebarLabel">CRUDAPPDEMO</h5>
@@ -221,7 +163,6 @@
                 </div>
             </div>
 
-            <!-- Page content -->
             <main class="p-4">
                 <div class="container-fluid">
                     @RenderBody()
@@ -231,42 +172,27 @@
             <footer class="app-footer">
                 <div class="container d-flex justify-content-between">
                     <div>© @DateTime.Now.Year CRUDAPPDEMO</div>
-                    <div>
-                        <small class="text-muted">Built with <i class="fa-solid fa-heart text-danger"></i> & Bootstrap</small>
-                    </div>
                 </div>
             </footer>
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 
     <script>
-        // small theme toggle (light/dark) — persist in localStorage
         (function(){
           const btn = document.getElementById('themeToggle');
-          const root = document.documentElement;
           function applyDark(dark){
-            if(dark){
-              document.body.style.background = '#0f1724';
-              document.body.style.color = '#e6eef8';
-            } else {
-              document.body.style.background = '';
-              document.body.style.color = '';
-            }
+            if(dark){ document.body.style.background = '#0f1724'; document.body.style.color = '#e6eef8'; }
+            else { document.body.style.background = ''; document.body.style.color = ''; }
             btn.innerHTML = dark ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
           }
           let dark = localStorage.getItem('crud-theme') === 'dark';
           applyDark(dark);
-          btn.addEventListener('click', function(){
-            dark = !dark;
-            localStorage.setItem('crud-theme', dark ? 'dark' : 'light');
-            applyDark(dark);
-          });
+          btn.addEventListener('click', function(){ dark = !dark; localStorage.setItem('crud-theme', dark ? 'dark' : 'light'); applyDark(dark); });
         })();
     </script>
 

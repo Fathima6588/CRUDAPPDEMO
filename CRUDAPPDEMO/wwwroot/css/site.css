@@ -29,3 +29,30 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Responsive rules moved from inline views to avoid Razor @ parsing issues */
+
+/* hide sidebar on small screens */
+@media (max-width: 991px) {
+  aside.app-sidebar {
+    display: none;
+  }
+
+  .app-shell {
+    flex-direction: column;
+  }
+}
+
+/* Hero typography responsive tweaks */
+@media (min-width: 992px) {
+  .hero-title { font-size: 3rem; }
+  .hero-heading { font-size: 3.2rem; }
+  .hero-lead { font-size: 1.15rem; }
+}
+
+/* Layout-specific tweaks for the layout page */
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}

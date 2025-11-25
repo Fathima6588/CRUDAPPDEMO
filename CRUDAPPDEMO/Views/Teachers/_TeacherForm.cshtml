@@ -1,0 +1,29 @@
+@model CRUDAPPDEMO.Models.Teacher
+
+<input asp-for="Id" type="hidden" />
+
+<div class="form-group mb-3">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+
+<div class="form-group mb-3">
+    <label asp-for="Email" class="form-label"></label>
+    <input asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+</div>
+
+<div class="form-group mb-3">
+    <label asp-for="Course" class="form-label"></label>
+    <input asp-for="Course" class="form-control" />
+    <span asp-validation-for="Course" class="text-danger"></span>
+</div>
+
+<div class="form-group mb-3">
+    <label asp-for="StudentId" class="form-label">Student</label>
+    <select asp-for="StudentId" asp-items="ViewBag.Students" class="form-select">
+        <option value="">(none)</option>
+    </select>
+    <span asp-validation-for="StudentId" class="text-danger"></span>
+</div>
